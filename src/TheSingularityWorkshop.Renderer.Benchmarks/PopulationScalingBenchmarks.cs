@@ -8,7 +8,7 @@ namespace TheSingularityWorkshop.Renderer.Benchmarks;
 /// with observer-relative temporal responsibility.
 /// </summary>
 [MemoryDiagnoser]
-public sealed class PopulationScalingBenchmarks
+public class PopulationScalingBenchmarks
 {
     private SyntheticEntity[] _entities = [];
     private double _sink;
