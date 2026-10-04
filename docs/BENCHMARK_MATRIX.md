@@ -1,3 +1,16 @@
+## Current measured baseline
+
+The first successful math run establishes the following machine-specific baseline:
+
+- projection: ~6.2–6.3 ns, 0 B;
+- lateral parallax: ~2.8 ns, 0 B;
+- view angle: ~14–20 ns, 0 B;
+- Event Horizon selection: ~35–38 ns, 64 B.
+
+Depth from 10 m to 300 km did not materially increase the cost of the mathematical primitives. Event Horizon selection is the first identified allocation hotspot.
+
+The next benchmark pass must expand from primitive timing into population and scheduling scaling. The benchmark matrix therefore treats **selection cost, scheduling cost, and representation work as separate charges** rather than assuming observer-relative work is free.
+
 # Benchmark Matrix
 
 | Layer | Benchmark | Variable | First values | Question |
