@@ -176,6 +176,15 @@ Initial populations:
 
 The first pass is CPU-only and intentionally backend-independent.
 
+### Additional selection and scheduling experiments
+
+The suite also measures two places where an observer-relative design can accidentally lose its advantage:
+
+- **Event Horizon selection scaling** — 4, 16, 64, and 256 horizons, with allocation explicitly reported;
+- **Renderer FSM scheduling** — the cost of advancing one renderer machine versus advancing the complete configured population.
+
+These are important because selection and scheduling are not allowed to disappear from the accounting merely because they enable reduced representation work.
+
 ### Layer 5 — Complete rendering
 
 Later experiments may add:
