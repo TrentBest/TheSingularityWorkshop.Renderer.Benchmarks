@@ -91,7 +91,7 @@ The first successful BenchmarkDotNet run establishes the baseline for the render
 | ViewAngle | 20.371 ns | 19.420 ns | 14.240 ns | 0 B |
 | SelectEventHorizon | 35.264 ns | 35.404 ns | 38.400 ns | 64 B |
 
-These measurements do **not** prove complete renderer performance. They establish something narrower and useful: changing depth changes the mathematical result without making the core projection/parallax operations asymptotically more expensive. That is consistent with the Event Horizon hypothesis that distance should influence computational responsibility, not make observer-relative mathematics intrinsically more expensive.
+These measurements do **not** prove complete renderer performance. A later validation run with the debugger attached produced 6.225–6.387 ns projection, 2.810–2.828 ns lateral parallax, 14.388–20.395 ns view angle, and 33.148–38.379 ns Event Horizon selection across the same depths. The agreement is encouraging, but that run is explicitly treated as debugger-attached validation rather than as a replacement for clean BenchmarkDotNet measurements. They establish something narrower and useful: changing depth changes the mathematical result without making the core projection/parallax operations asymptotically more expensive. That is consistent with the Event Horizon hypothesis that distance should influence computational responsibility, not make observer-relative mathematics intrinsically more expensive.
 
 `SelectEventHorizon` currently allocates 64 B per call in the measured implementation. That is now an explicit optimization target rather than something to hide in the benchmark. If selection becomes hot enough, allocation-free selection and larger-horizon scaling will be measured separately.
 
