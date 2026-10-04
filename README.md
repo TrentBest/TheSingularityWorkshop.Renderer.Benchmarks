@@ -79,6 +79,24 @@ The exact Renderer package version used by a benchmark result is recorded with t
 
 The Renderer is consumed through its published NuGet package so the benchmark repository has a clean dependency boundary. The benchmark suite should not depend on a local filesystem layout or on a nested source checkout.
 
+
+## First measured result — observer-relative math
+
+The first successful BenchmarkDotNet run establishes the baseline for the renderer's backend-independent math layer. On the measured machine, the three pure mathematical primitives remained effectively constant-cost from 10 m through 300 km:
+
+| Method | 10 m | 1 km | 300 km | Allocation |
+|---|---:|---:|---:|---:|
+| ProjectHorizontal | 6.308 ns | 6.228 ns | 6.310 ns | 0 B |
+| LateralParallax | 2.852 ns | 2.851 ns | 2.812 ns | 0 B |
+| ViewAngle | 20.371 ns | 19.420 ns | 14.240 ns | 0 B |
+| SelectEventHorizon | 35.264 ns | 35.404 ns | 38.400 ns | 64 B |
+
+These measurements do **not** prove complete renderer performance. They establish something narrower and useful: changing depth changes the mathematical result without making the core projection/parallax operations asymptotically more expensive. That is consistent with the Event Horizon hypothesis that distance should influence computational responsibility, not make observer-relative mathematics intrinsically more expensive.
+
+`SelectEventHorizon` currently allocates 64 B per call in the measured implementation. That is now an explicit optimization target rather than something to hide in the benchmark. If selection becomes hot enough, allocation-free selection and larger-horizon scaling will be measured separately.
+
+The next experiments therefore move from primitive cost to the actual question: **what happens when the logical population becomes enormous while high-frequency responsibility remains bounded?**
+
 ## What this repository is not
 
 This is not yet a claim that the Singularity Workshop Renderer is faster than Unreal Nanite, Unity, or another production renderer.
