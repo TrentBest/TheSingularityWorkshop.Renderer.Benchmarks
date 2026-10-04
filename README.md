@@ -64,7 +64,7 @@ Our first job is smaller and more important:
 6. deliberately push into abnormally large logical populations;
 7. model autonomous agent responsibilities;
 8. only then introduce a rendering backend;
-7. compare complete systems only when the workloads are genuinely comparable.
+9. compare complete systems only when the workloads are genuinely comparable.
 
 ## Benchmark layers
 
