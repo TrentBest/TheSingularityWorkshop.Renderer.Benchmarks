@@ -3,7 +3,7 @@ using BenchmarkDotNet.Attributes;
 namespace TheSingularityWorkshop.Renderer.Benchmarks;
 
 [MemoryDiagnoser]
-public sealed class AutonomousWorldBenchmarks
+public class AutonomousWorldBenchmarks
 {
     private const int HighFrequencyPopulation = 1_000;
     private const int ObservablePopulation = 10_000;
