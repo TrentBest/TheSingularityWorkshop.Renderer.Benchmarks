@@ -13,7 +13,7 @@ public class PopulationScalingBenchmarks
     private SyntheticEntity[] _entities = [];
     private double _sink;
 
-    [Params(1_000, 10_000, 100_000, 1_000_000)]
+    [Params(1_000, 10_000, 100_000, 1_000_000, 10_000_000)]
     public int Population { get; set; }
 
     [GlobalSetup]
@@ -23,11 +23,8 @@ public class PopulationScalingBenchmarks
 
         for (var i = 0; i < _entities.Length; i++)
         {
-            // Deterministic spatial distribution. The benchmark is deliberately
-            // not a visibility/culling benchmark yet.
             var depth = 10.0 + ((i * 7919L) % 300_000);
             var horizontal = ((i * 104729L) % 20_000) / 100.0 - 100.0;
-
             _entities[i] = new SyntheticEntity(horizontal, depth);
         }
     }
@@ -54,8 +51,6 @@ public class PopulationScalingBenchmarks
 
         foreach (var entity in _entities)
         {
-            // The benchmark models temporal responsibility only. It does not
-            // pretend that distance selection is free.
             var horizon = ObserverDistance.Select(entity.Depth, Horizons);
 
             switch (horizon.Name)
@@ -70,8 +65,6 @@ public class PopulationScalingBenchmarks
                     break;
 
                 case "Landscape":
-                    // The mountain remains represented, but its full positional
-                    // evaluation is not performed every scheduler tick.
                     result += entity.Depth * 0.000001;
                     break;
 
