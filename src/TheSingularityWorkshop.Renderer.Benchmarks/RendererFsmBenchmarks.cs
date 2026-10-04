@@ -27,10 +27,19 @@ public class RendererFsmBenchmarks
         }
     }
 
-    [Benchmark]
-    public void UpdateRendererGroup()
+    [Benchmark(Baseline = true)]
+    public void UpdateOneRendererGroup()
     {
         _machines[0].Advance();
+    }
+
+    [Benchmark]
+    public void UpdateAllRendererGroups()
+    {
+        foreach (var machine in _machines)
+        {
+            machine.Advance();
+        }
     }
 
     [GlobalCleanup]
