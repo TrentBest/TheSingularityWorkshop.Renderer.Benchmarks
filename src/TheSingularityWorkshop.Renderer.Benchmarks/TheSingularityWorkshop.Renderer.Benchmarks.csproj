@@ -13,7 +13,7 @@
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.16.0-preview.2" />
     <PackageReference Include="TheSingularityWorkshop.FSM_API" Version="1.0.13" />
-    <PackageReference Include="TheSingularityWorkshop.Renderer" Version="0.1.0-alpha.1" />
+    <PackageReference Include="TheSingularityWorkshop.Renderer" Version="0.1.0-alpha.2" />
   </ItemGroup>
 
 </Project>
