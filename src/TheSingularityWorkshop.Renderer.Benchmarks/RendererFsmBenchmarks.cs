@@ -8,7 +8,7 @@ namespace TheSingularityWorkshop.Renderer.Benchmarks;
 /// This isolates scheduling overhead from graphics work.
 /// </summary>
 [MemoryDiagnoser]
-public sealed class RendererFsmBenchmarks
+public class RendererFsmBenchmarks
 {
     private RendererComputationMachine[] _machines = [];
 
