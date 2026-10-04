@@ -12,8 +12,14 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - name: Checkout
+      - name: Checkout benchmark repository
         uses: actions/checkout@v7
+
+      - name: Checkout Renderer source
+        uses: actions/checkout@v7
+        with:
+          repository: TrentBest/TheSingularityWorkshop.Renderer
+          path: Renderer
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v6
