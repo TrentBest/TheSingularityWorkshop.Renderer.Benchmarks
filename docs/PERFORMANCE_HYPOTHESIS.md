@@ -73,3 +73,30 @@ It would establish that:
 - temporal frequency is a useful independent optimization dimension;
 - distant visible objects can remain represented at lower computational cadence;
 - total work can scale with observable workload rather than full world population under controlled conditions.
+
+
+## Autonomous-world extension
+
+The extreme-world experiment extends the hypothesis from visible geometry to meaningful simulated agents.
+
+A soldier can have standing orders, general orders, local procedure/safety state, movement state, role, and event-driven responses. Those responsibilities do not all need the same evaluation frequency.
+
+The benchmark therefore introduces three distinct populations:
+
+- `N_logical`: agents that exist in the world;
+- `N_materialized`: agents requiring active instantiated state;
+- `N_observable`: agents whose current consequences matter to the observer.
+
+The stronger hypothesis is:
+
+> A large world can remain semantically and causally alive without every entity requiring full-rate, full-fidelity computation.
+
+This is deliberately testable.
+
+A command-center view should preserve large-scale formations and meaningful activity. A nearby research demonstration may promote a much smaller cohort into high-frequency simulation and rendering. When the observer leaves, those agents can demote without ceasing to exist.
+
+This also creates an important simulation test: state changes caused by events should propagate through the FSM system without forcing unrelated agents into high-frequency evaluation.
+
+For example, a safety procedure may become relevant after an incident. The benchmark should measure the cost of propagating that changed order/procedure state separately from the cost of continuously evaluating every soldier in anticipation of the incident.
+
+The benchmark must not assume that this strategy wins. If maintaining causal correctness, selection, scheduling, or state propagation costs as much as full-rate simulation, that is a falsification result.
