@@ -27,6 +27,14 @@ This does **not** mean hiding distant objects, using fog to make geometry disapp
 
 A distant mountain can remain visible and mathematically represented while requiring dramatically less positional evaluation because its observer-relative consequence changes slowly.
 
+The same principle should apply to populated worlds.
+
+A command-center window should be able to look across a world containing an enormous number of soldiers without requiring every soldier to behave, simulate, animate, and render at the same frequency as the soldier standing ten meters from the observer.
+
+That nearby soldier may need detailed animation, interaction, collision, equipment state, orders, and safety behavior. A distant formation may instead need semantic identity, aggregate state, low-frequency movement, occasional order propagation, event-driven state changes, and enough visual consequence to remain believable.
+
+The soldier has not ceased to exist. The computational representation has changed.
+
 The benchmark suite therefore separates:
 
 - world population,
@@ -53,7 +61,9 @@ Our first job is smaller and more important:
 3. measure population scaling;
 4. compare naive full-rate evaluation with observer-relative work;
 5. establish confidence intervals and error;
-6. only then introduce a rendering backend;
+6. deliberately push into abnormally large logical populations;
+7. model autonomous agent responsibilities;
+8. only then introduce a rendering backend;
 7. compare complete systems only when the workloads are genuinely comparable.
 
 ## Benchmark layers
