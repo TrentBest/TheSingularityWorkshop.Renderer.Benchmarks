@@ -50,24 +50,12 @@ The benchmark suite therefore separates:
 
 ## Running the benchmarks locally
 
-The benchmark project consumes the Renderer as source rather than as a published NuGet package. The Renderer repository is therefore tracked as a **Git submodule** at `Renderer/`.
+The benchmark project consumes the published **TheSingularityWorkshop.Renderer** NuGet package. The benchmark lab therefore measures the package artifact rather than maintaining a source-project relationship.
 
-### Existing clone
-
-If you already cloned this repository, from the repository root run:
+Clone or update the repository normally:
 
 ```powershell
 git pull
-git submodule update --init --recursive
-```
-
-### New clone
-
-Clone with the submodule in one step:
-
-```powershell
-git clone --recurse-submodules https://github.com/TrentBest/TheSingularityWorkshop.Renderer.Benchmarks.git
-cd TheSingularityWorkshop.Renderer.Benchmarks
 ```
 
 Then restore and build:
@@ -85,13 +73,11 @@ dotnet run --project .\src\TheSingularityWorkshop.Renderer.Benchmarks\TheSingula
 
 BenchmarkDotNet will present the available benchmark classes and filters. **Do not start with the 100-million-agent experiment unless you deliberately want the extreme workload.** Begin with the mathematical/FSM benchmarks and then move into population scaling.
 
-The exact Renderer commit used by a benchmark checkout is pinned by the submodule. This makes a recorded result reproducible against a known Renderer revision rather than silently measuring whatever happens to be at Renderer `main` later.
+The exact Renderer package version used by a benchmark result is recorded with the benchmark environment. This keeps the experiment tied to a published Renderer artifact rather than to an arbitrary source checkout.
 
-### Why the source is a submodule
+### Why the benchmark uses NuGet
 
-The Renderer is intentionally **not published to NuGet yet**. The benchmark lab needs to measure the actual Renderer implementation without forcing a premature package release.
-
-The GitHub Actions build initializes the same submodule, so CI and local source composition use the same repository relationship.
+The Renderer is consumed through its published NuGet package so the benchmark repository has a clean dependency boundary. The benchmark suite should not depend on a local filesystem layout or on a nested source checkout.
 
 ## What this repository is not
 
@@ -217,10 +203,8 @@ Do not optimize the benchmark to make the theory win.
 ## Repository structure
 
 ```
-/Renderer                 Renderer source submodule
 /src
   TheSingularityWorkshop.Renderer.Benchmarks
-
 /docs
   METHODOLOGY.md
   BENCHMARK_MATRIX.md
