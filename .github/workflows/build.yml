@@ -14,12 +14,8 @@ jobs:
     steps:
       - name: Checkout benchmark repository
         uses: actions/checkout@v7
-
-      - name: Checkout Renderer source
-        uses: actions/checkout@v7
         with:
-          repository: TrentBest/TheSingularityWorkshop.Renderer
-          path: Renderer
+          submodules: recursive
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v6
