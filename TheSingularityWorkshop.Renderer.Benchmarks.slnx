@@ -1,4 +1,3 @@
 <Solution>
-  <Project Path="Renderer/TheSingularityWorkshop.Renderer.csproj" />
   <Project Path="src/TheSingularityWorkshop.Renderer.Benchmarks/TheSingularityWorkshop.Renderer.Benchmarks.csproj" />
 </Solution>
