@@ -1,0 +1,9 @@
+{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "TheSingularityWorkshop.Renderer.Benchmarks": {
+      "commandName": "Project",
+      "commandLineArgs": "--filter *RendererMathBenchmarks*"
+    }
+  }
+}
