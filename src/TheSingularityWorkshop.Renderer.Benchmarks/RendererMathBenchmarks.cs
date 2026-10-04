@@ -4,7 +4,7 @@ using TheSingularityWorkshop.Renderer;
 namespace TheSingularityWorkshop.Renderer.Benchmarks;
 
 [MemoryDiagnoser]
-public sealed class RendererMathBenchmarks
+public class RendererMathBenchmarks
 {
     private readonly EventHorizon[] _horizons =
     [
