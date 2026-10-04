@@ -27,6 +27,21 @@ Event Horizon selection is also tens of nanoseconds, but currently allocates 64 
 
 This is **not** evidence that the complete Renderer is faster than a production renderer. It is calibration evidence for the next experiments: population scaling, scheduler responsibility, semantic work, and autonomous-world workloads.
 
+## Validation run — 2026-10-04
+
+A second math-only run was executed with BenchmarkDotNet 0.16.0-preview.2 on the same Windows 10 22H2 / Intel Core i5-10400F machine. The .NET host remained 8.0.31 and the Renderer artifact remained 0.1.0-alpha.1.
+
+| Method | 10 m | 1 km | 300 km | Allocation |
+|---|---:|---:|---:|---:|
+| ProjectHorizontal | 6.244 ns | 6.225 ns | 6.387 ns | 0 B |
+| LateralParallax | 2.810 ns | 2.828 ns | 2.821 ns | 0 B |
+| ViewAngle | 20.395 ns | 19.409 ns | 14.388 ns | 0 B |
+| SelectEventHorizon | 33.148 ns | 35.584 ns | 38.379 ns | 64 B |
+
+This run was executed with an **attached debugger**, which BenchmarkDotNet explicitly warned about. It is therefore validation evidence, not the clean reference baseline. The result nevertheless reproduces the earlier shape closely: projection and parallax remain effectively constant-cost across depth, view-angle cost remains in the same small-nanosecond range, and Event Horizon selection remains a 64 B allocation hotspot.
+
+The next useful measurement is still the expanded population/scheduling suite. The math is now sufficiently calibrated that further effort should move toward the scaling question rather than repeatedly measuring the same primitives.
+
 ## What comes next
 
 The benchmark suite now moves toward the falsifiable claim:
