@@ -1,3 +1,14 @@
+## Current execution expansion
+
+The next run expands the controlled suite to include:
+
+- population scaling through **10,000,000** logical entities;
+- Renderer FSM cost for one machine versus updating the complete configured population;
+- Event Horizon selection with **4, 16, 64, and 256** horizons;
+- the existing 1M/10M/100M compact autonomous-world workload.
+
+The benchmark launcher no longer filters itself to the math class. The complete suite is now available from the project launch profile; BenchmarkDotNet filters can still be supplied explicitly for focused runs.
+
 ## Current measured baseline
 
 The first successful math run establishes the following machine-specific baseline:
