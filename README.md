@@ -48,6 +48,88 @@ The benchmark suite therefore separates:
 - memory allocation,
 - and eventually rendering submission/GPU work.
 
+## Running the benchmarks locally
+
+The benchmark project consumes the Renderer as source rather than as a published NuGet package. The Renderer repository is therefore tracked as a **Git submodule** at `Renderer/`.
+
+### Existing clone
+
+If you already cloned this repository, from the repository root run:
+
+```powershell
+git pull
+git submodule update --init --recursive
+```
+
+### New clone
+
+Clone with the submodule in one step:
+
+```powershell
+git clone --recurse-submodules https://github.com/TrentBest/TheSingularityWorkshop.Renderer.Benchmarks.git
+cd TheSingularityWorkshop.Renderer.Benchmarks
+```
+
+Then restore and build:
+
+```powershell
+dotnet restore .\TheSingularityWorkshop.Renderer.Benchmarks.slnx
+dotnet build .\TheSingularityWorkshop.Renderer.Benchmarks.slnx --configuration Release
+```
+
+Run the benchmark launcher:
+
+```powershell
+dotnet run --project .\src\TheSingularityWorkshop.Renderer.Benchmarks\TheSingularityWorkshop.Renderer.Benchmarks.csproj --configuration Release
+```
+
+BenchmarkDotNet will present the available benchmark classes and filters. **Do not start with the 100-million-agent experiment unless you deliberately want the extreme workload.** Begin with the mathematical/FSM benchmarks and then move into population scaling.
+
+The exact Renderer commit used by a benchmark checkout is pinned by the submodule. This makes a recorded result reproducible against a known Renderer revision rather than silently measuring whatever happens to be at Renderer `main` later.
+
+### Why the source is a submodule
+
+The Renderer is intentionally **not published to NuGet yet**. The benchmark lab needs to measure the actual Renderer implementation without forcing a premature package release.
+
+The GitHub Actions build initializes the same submodule, so CI and local source composition use the same repository relationship.
+
+## The theory under test
+
+The Renderer is built around Event Horizons and observer-relative computational detail.
+
+The working hypothesis is:
+
+> **The amount of stuff in the world should not determine the amount of computation required to show the world. Observable consequence should.**
+
+Or, more compactly:
+
+> **Render less by understanding less.**
+
+This does **not** mean hiding distant objects, using fog to make geometry disappear, or pretending that an object does not exist.
+
+A distant mountain can remain visible and mathematically represented while requiring dramatically less positional evaluation because its observer-relative consequence changes slowly.
+
+The same principle should apply to populated worlds.
+
+A command-center window should be able to look across a world containing an enormous number of soldiers without requiring every soldier to behave, simulate, animate, and render at the same frequency as the soldier standing ten meters from the observer.
+
+That nearby soldier may need detailed animation, interaction, collision, equipment state, orders, and safety behavior. A distant formation may instead need semantic identity, aggregate state, low-frequency movement, occasional order propagation, event-driven state changes, and enough visual consequence to remain believable.
+
+The soldier has not ceased to exist. The computational representation has changed.
+
+The benchmark suite therefore separates:
+
+- world population,
+- observable population,
+- representation cost,
+- evaluation frequency,
+- semantic importance,
+- event-driven work,
+- scheduling cost,
+- projection/parallax consequence,
+- memory allocation,
+- and eventually rendering submission/GPU work.
+
 ## What this repository is not
 
 This is not yet a claim that the Singularity Workshop Renderer is faster than Unreal Nanite, Unity, or another production renderer.
@@ -150,6 +232,7 @@ Every benchmark result should record:
 
 - commit SHA;
 - benchmark version;
+- Renderer submodule commit;
 - .NET/runtime version;
 - operating system;
 - CPU;
@@ -171,6 +254,7 @@ Do not optimize the benchmark to make the theory win.
 ## Repository structure
 
 ```
+/Renderer                 Renderer source submodule
 /src
   TheSingularityWorkshop.Renderer.Benchmarks
 
