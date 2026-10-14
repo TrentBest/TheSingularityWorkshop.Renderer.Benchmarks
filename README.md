@@ -5,7 +5,7 @@
   </a>
 </p>
 
-# TheSingularityWorkshop.Renderer.Benchmarks
+# ✳️ 00 TheSingularityWorkshop.Renderer.Benchmarks
 
 ![Status](https://img.shields.io/badge/status-experimental-blue)
 ![.NET](https://img.shields.io/badge/.NET-8-512BD4)
@@ -17,6 +17,9 @@ This repository exists to answer a specific engineering question with measuremen
 > **As world population increases, can observer-relative computation preserve the information an observer needs while doing substantially less work than evaluating every entity at full fidelity and full frequency?**
 
 This is not a benchmark intended to produce a flattering number. It is intended to **falsify the Renderer theory if the measurements disagree with it**.
+
+
+This README follows the Workshop's shared [Documentation Standard](https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS/blob/master/DOCUMENTATION_STANDARD.md), while keeping this repository's own purpose and implementation authoritative.
 
 ## The theory under test
 
