@@ -18,9 +18,11 @@ public class TemporalResponsibilityBenchmarks
     private int[][] _cohorts = [];
     private double[] _fullRateValues = [];
     private double[] _observerValues = [];
+    private double[] _fidelityValues = [];
     private double _sink;
     private int _fullRateTick;
     private int _observerTick;
+    private int _fidelityTick;
 
     [Params(1_000, 10_000, 100_000, 1_000_000)]
     public int Population { get; set; }
@@ -31,6 +33,7 @@ public class TemporalResponsibilityBenchmarks
         _entities = new SyntheticEntity[Population];
         _fullRateValues = new double[Population];
         _observerValues = new double[Population];
+        _fidelityValues = new double[Population];
 
         var cohortBuilders = new Dictionary<int, List<int>>
         {
@@ -53,11 +56,13 @@ public class TemporalResponsibilityBenchmarks
             var initial = Evaluate(_entities[i], tick: 0);
             _fullRateValues[i] = initial;
             _observerValues[i] = initial;
+            _fidelityValues[i] = initial;
         }
 
         _cohorts = cohortBuilders.Values.Select(indices => indices.ToArray()).ToArray();
         _fullRateTick = 0;
         _observerTick = 0;
+        _fidelityTick = 0;
         _sink = 0;
     }
 
@@ -98,25 +103,7 @@ public class TemporalResponsibilityBenchmarks
         for (var windowTick = 0; windowTick < MeasurementWindowTicks; windowTick++)
         {
             var tick = ++_observerTick;
-
-            foreach (var cohort in _cohorts)
-            {
-                if (cohort.Length == 0)
-                {
-                    continue;
-                }
-
-                var cadence = _entities[cohort[0]].Cadence;
-                if (tick % cadence != 0)
-                {
-                    continue;
-                }
-
-                foreach (var index in cohort)
-                {
-                    _observerValues[index] = Evaluate(_entities[index], tick);
-                }
-            }
+            UpdateDueCohorts(_observerValues, tick);
         }
 
         var checksum = 0.0;
@@ -127,6 +114,59 @@ public class TemporalResponsibilityBenchmarks
 
         _sink = checksum;
         return checksum;
+    }
+
+    /// <summary>
+    /// Measures projection-space staleness over the same 63-tick window.
+    /// The full-rate reference evaluates only the fixed observer sample every tick;
+    /// the compared values are the last values written by due observer cohorts.
+    /// The returned mean absolute error is a diagnostic metric, not a timing claim.
+    /// </summary>
+    [Benchmark]
+    public double ObserverRelativeMeanAbsoluteErrorWindow()
+    {
+        var totalAbsoluteError = 0.0;
+        var comparisons = 0;
+
+        for (var windowTick = 0; windowTick < MeasurementWindowTicks; windowTick++)
+        {
+            var tick = ++_fidelityTick;
+            UpdateDueCohorts(_fidelityValues, tick);
+
+            for (var sample = 0; sample < ObservableSampleSize; sample++)
+            {
+                var index = SampleIndex(sample);
+                var fullRateReference = Evaluate(_entities[index], tick);
+                totalAbsoluteError += Math.Abs(fullRateReference - _fidelityValues[index]);
+                comparisons++;
+            }
+        }
+
+        var meanAbsoluteError = totalAbsoluteError / comparisons;
+        _sink = meanAbsoluteError;
+        return meanAbsoluteError;
+    }
+
+    private void UpdateDueCohorts(double[] values, int tick)
+    {
+        foreach (var cohort in _cohorts)
+        {
+            if (cohort.Length == 0)
+            {
+                continue;
+            }
+
+            var cadence = _entities[cohort[0]].Cadence;
+            if (tick % cadence != 0)
+            {
+                continue;
+            }
+
+            foreach (var index in cohort)
+            {
+                values[index] = Evaluate(_entities[index], tick);
+            }
+        }
     }
 
     private int SampleIndex(int sample) =>
