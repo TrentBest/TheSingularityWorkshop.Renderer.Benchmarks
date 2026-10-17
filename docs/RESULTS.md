@@ -1,5 +1,11 @@
 # Results
 
+## Temporal responsibility — implementation added, measurement pending
+
+A dedicated `TemporalResponsibilityBenchmarks` class now compares a full-rate 64-tick evaluation window with cadence-aware cohort updates at populations of 1k, 10k, 100k, and 1M. The experiment is documented in [TEMPORAL_RESPONSIBILITY.md](TEMPORAL_RESPONSIBILITY.md).
+
+**No results are published for this experiment yet.** The implementation has been committed to the development branch, but a controlled BenchmarkDotNet run and output review are still required. The 32-entity sample is only a benchmark sink; it does not establish representation fidelity. A follow-up must quantify sampled error against a full-rate reference before any information-preservation claim is made.
+
 The successful first run was performed on the user's Windows 10 22H2 machine with an Intel Core i5-10400F, .NET host 8.0.31, using BenchmarkDotNet 0.16.0-preview.2 and Renderer 0.1.0-alpha.1. These values are machine-specific and are not a cross-platform performance claim.
 
 ## Renderer math baseline
@@ -53,7 +59,6 @@ versus
 `Observer-relative: C_selection + C_scheduling + Σ(N_i × C_i × f_i)`
 
 The critical measurements are absolute work, scaling slope, allocation, and information preservation—not a flattering single ratio.
-No renderer performance conclusions are published here yet.
 
 The repository has just been established as the controlled experimental environment.
 
