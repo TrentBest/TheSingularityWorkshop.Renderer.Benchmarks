@@ -121,7 +121,7 @@ Our first job is smaller and more important:
 
 [`TemporalResponsibilityBenchmarks`](docs/TEMPORAL_RESPONSIBILITY.md) compares a fixed 63-tick window in which every entity is evaluated every tick against a cohort model that updates only when each cadence is due. It scales from 1k to 1M entities, uses the same projection math, and reads the same 32-entity sample after each window.
 
-This is an isolated synthetic CPU experiment. It does not yet measure complete frame submission, fidelity error, FSM event propagation, or GPU work. No performance result is claimed until BenchmarkDotNet has been run and its artifacts reviewed.
+This is an isolated synthetic CPU experiment. It now includes a sampled mean-absolute-error workload against a full-rate projection reference, but that aggregate metric is not yet cadence-specific and is not a perceptual or world-space fidelity guarantee. It does not measure complete frame submission, FSM event propagation, or GPU work. No performance result is claimed until BenchmarkDotNet has been run and its artifacts reviewed.
 
 
 ### Layer 1 — Mathematical primitives
