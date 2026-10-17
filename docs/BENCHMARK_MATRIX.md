@@ -2,7 +2,7 @@
 
 The new `TemporalResponsibilityBenchmarks` workload compares a 63-tick full-rate evaluation window against cadence-aware cohort updates at 1, 4, 16, and 64 ticks. Populations are 1k, 10k, 100k, and 1M. Both paths use the same projection/view-angle math and read the same fixed-size 32-entity sample after the window.
 
-This isolates temporal evaluation responsibility from the cost of scanning every entity. It is **not yet** a complete rendering result or a fidelity proof: sampled output is a benchmark sink, not an error metric. See [Temporal Responsibility Experiment](TEMPORAL_RESPONSIBILITY.md) for scope, limitations, and the required next correctness experiment.
+This isolates temporal evaluation responsibility from the cost of scanning every entity and now includes a sampled mean-absolute-error comparison against a full-rate reference. The error is in synthetic projection-space output; it is not a perceptual or world-space fidelity proof, and cadence-specific error reporting remains future work. See [Temporal Responsibility Experiment](TEMPORAL_RESPONSIBILITY.md) for scope and limitations.
 
 ## Current execution expansion
 
