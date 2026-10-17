@@ -21,7 +21,7 @@ The entity state and arrays are allocated during `GlobalSetup`. MemoryDiagnoser 
 
 ## What it measures
 
-- full-rate evaluation time across a fixed 64-tick window;
+- full-rate evaluation time across a fixed 63-tick window;
 - cadence-aware cohort update time across the same window;
 - per-invocation allocations;
 - scaling as the logical population grows.
