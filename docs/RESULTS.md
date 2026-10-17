@@ -2,9 +2,9 @@
 
 ## Temporal responsibility — implementation added, measurement pending
 
-A dedicated `TemporalResponsibilityBenchmarks` class now compares a full-rate 64-tick evaluation window with cadence-aware cohort updates at populations of 1k, 10k, 100k, and 1M. The experiment is documented in [TEMPORAL_RESPONSIBILITY.md](TEMPORAL_RESPONSIBILITY.md).
+A dedicated `TemporalResponsibilityBenchmarks` class now compares a full-rate 63-tick evaluation window with cadence-aware cohort updates at populations of 1k, 10k, 100k, and 1M. It also includes a sampled mean-absolute-error workload comparing stale observer-relative values with a full-rate reference over the same 32 samples each tick. The experiment is documented in [TEMPORAL_RESPONSIBILITY.md](TEMPORAL_RESPONSIBILITY.md).
 
-**No results are published for this experiment yet.** The implementation has been committed to the development branch, but a controlled BenchmarkDotNet run and output review are still required. The 32-entity sample is only a benchmark sink; it does not establish representation fidelity. A follow-up must quantify sampled error against a full-rate reference before any information-preservation claim is made.
+**No results are published for this experiment yet.** The implementation has been committed to the development branch, but a controlled BenchmarkDotNet run and output review are still required. The scheduling methods' 32-entity sample remains a benchmark sink; the new error workload reports an aggregate projection-space mean absolute error, not a perceptual fidelity guarantee. Performance and error measurements are both pending a controlled BenchmarkDotNet run and output review.
 
 The successful first run was performed on the user's Windows 10 22H2 machine with an Intel Core i5-10400F, .NET host 8.0.31, using BenchmarkDotNet 0.16.0-preview.2 and Renderer 0.1.0-alpha.1. These values are machine-specific and are not a cross-platform performance claim.
 
