@@ -12,7 +12,7 @@ namespace TheSingularityWorkshop.Renderer.Benchmarks;
 public class TemporalResponsibilityBenchmarks
 {
     private const int ObservableSampleSize = 32;
-    private const int MeasurementWindowTicks = 64;
+    private const int MeasurementWindowTicks = 63;
 
     private SyntheticEntity[] _entities = [];
     private int[][] _cohorts = [];
