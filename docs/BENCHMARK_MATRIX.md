@@ -1,3 +1,9 @@
+## Temporal responsibility experiment
+
+The new `TemporalResponsibilityBenchmarks` workload compares a 64-tick full-rate evaluation window against cadence-aware cohort updates at 1, 4, 16, and 64 ticks. Populations are 1k, 10k, 100k, and 1M. Both paths use the same projection/view-angle math and read the same fixed-size 32-entity sample after the window.
+
+This isolates temporal evaluation responsibility from the cost of scanning every entity. It is **not yet** a complete rendering result or a fidelity proof: sampled output is a benchmark sink, not an error metric. See [Temporal Responsibility Experiment](TEMPORAL_RESPONSIBILITY.md) for scope, limitations, and the required next correctness experiment.
+
 ## Current execution expansion
 
 The next run expands the controlled suite to include:
@@ -43,17 +49,15 @@ The next benchmark pass must expand from primitive timing into population and sc
 
 ## Required comparison
 
-The first decisive comparison is:
-
 `Naive: N × C_full × f_full`
 
-versus:
+versus
 
-`Observer-relative: Σ N_i × C_i × f_i`
+`Observer-relative: C_selection + C_scheduling + Σ N_i × C_i × f_i`
 
-The benchmark must report both absolute work and ratio.
+The observer-relative measurement must charge itself for selection and scheduling.
 
-## Later GPU matrix
+# Later GPU matrix
 
 When a backend exists:
 
@@ -88,7 +92,7 @@ For extreme populations, distinguish:
 
 `N_logical` — entities that exist in the simulated world
 
-from:
+from
 
 `N_materialized` — entities that currently require instantiated computational state
 
@@ -102,11 +106,9 @@ A 100-million-agent scenario should not automatically mean 100 million heavyweig
 
 ## Required comparison
 
-The first decisive comparison is:
-
 `Naive: N × C_full × f_full`
 
-versus:
+versus
 
 `Observer-relative: C_selection + C_scheduling + Σ N_i × C_i × f_i`
 
