@@ -119,7 +119,7 @@ Our first job is smaller and more important:
 
 ### Temporal responsibility — cadence versus full-rate evaluation
 
-[`TemporalResponsibilityBenchmarks`](docs/TEMPORAL_RESPONSIBILITY.md) compares a fixed 64-tick window in which every entity is evaluated every tick against a cohort model that updates only when each cadence is due. It scales from 1k to 1M entities, uses the same projection math, and reads the same 32-entity sample after each window.
+[`TemporalResponsibilityBenchmarks`](docs/TEMPORAL_RESPONSIBILITY.md) compares a fixed 63-tick window in which every entity is evaluated every tick against a cohort model that updates only when each cadence is due. It scales from 1k to 1M entities, uses the same projection math, and reads the same 32-entity sample after each window.
 
 This is an isolated synthetic CPU experiment. It does not yet measure complete frame submission, fidelity error, FSM event propagation, or GPU work. No performance result is claimed until BenchmarkDotNet has been run and its artifacts reviewed.
 
