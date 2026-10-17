@@ -15,7 +15,7 @@ Observer sample:  32 deterministic entity indices
 Cohorts:          cadence 1 / 4 / 16 / 64 ticks
 ```
 
-Synthetic entities have a stable depth, a small deterministic lateral velocity, and a cadence selected by depth. Both methods evaluate the same projection and view-angle functions. The full-rate method evaluates every entity at every tick. The observer-relative method updates only cohorts due on that tick and reads the same fixed-size sample at the end.
+Synthetic entities have a stable depth, a small deterministic lateral velocity, and a cadence selected by depth. Both methods evaluate the same projection and view-angle functions. The full-rate method evaluates every entity at every tick. The observer-relative method updates only cohorts due on that tick and reads the same fixed-size sample at the end. The 63-tick window is intentionally not divisible by all cohort cadences; a 64-tick window would refresh every cohort at its final tick and make the boundary sample artificially flattering.
 
 The entity state and arrays are allocated during `GlobalSetup`. MemoryDiagnoser records benchmark allocations; setup allocations are not the per-invocation cost.
 
