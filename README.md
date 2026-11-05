@@ -5,6 +5,7 @@
 ![Status](https://img.shields.io/badge/status-experimental-blue)
 ![.NET](https://img.shields.io/badge/.NET-8-512BD4)
 
+[![Sith Policy](assets/sith-policy.svg)](https://github.com/TrentBest/TheSingularityWorkshop.Renderer.Benchmarks/actions/workflows/sith-policy.yml)
 Performance laboratory for **The Singularity Workshop Renderer**.
 
 This repository exists to answer a specific engineering question with measurements:
