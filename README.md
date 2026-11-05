@@ -7,6 +7,8 @@
 
 # ✳️ 00 TheSingularityWorkshop.Renderer.Benchmarks
 
+[![Sith Policy](assets/sith-policy.svg)](https://github.com/TrentBest/TheSingularityWorkshop.Renderer.Benchmarks/actions/workflows/sith-policy.yml)
+
 ![Status](https://img.shields.io/badge/status-experimental-blue)
 ![.NET](https://img.shields.io/badge/.NET-8-512BD4)
 
@@ -17,7 +19,6 @@ This repository exists to answer a specific engineering question with measuremen
 > **As world population increases, can observer-relative computation preserve the information an observer needs while doing substantially less work than evaluating every entity at full fidelity and full frequency?**
 
 This is not a benchmark intended to produce a flattering number. It is intended to **falsify the Renderer theory if the measurements disagree with it**.
-
 
 This README follows the Workshop's shared [Documentation Standard](https://github.com/TrentBest/TheSingularityWorkshop.FSM_COS/blob/master/DOCUMENTATION_STANDARD.md), while keeping this repository's own purpose and implementation authoritative.
 
@@ -88,7 +89,6 @@ The exact Renderer package version used by a benchmark result is recorded with t
 ### Why the benchmark uses NuGet
 
 The Renderer is consumed through its published NuGet package so the benchmark repository has a clean dependency boundary. The benchmark suite should not depend on a local filesystem layout or on a nested source checkout.
-
 
 ## First measured result — observer-relative math
 
